@@ -118,6 +118,7 @@ def main():
     p.add_argument('--tta', '-t', action='store_true')
     p.add_argument('--postprocess', '-p', action='store_true')
     p.add_argument('--output_dir', '-o', type=str, default="")
+    p.add_argument('--id', type=str, default="")
     args = p.parse_args()
 
     print('loading model...', end=' ')
@@ -170,12 +171,12 @@ def main():
     print('inverse stft of instruments...', end=' ')
     wave = spec_utils.spectrogram_to_wave(y_spec, hop_length=args.hop_length)
     print('done')
-    sf.write('{}{}_Instruments.wav'.format(output_dir, basename), wave.T, sr)
+    sf.write('{}{}_Instruments.wav'.format(output_dir, args.id), wave.T, sr)
 
     print('inverse stft of vocals...', end=' ')
     wave = spec_utils.spectrogram_to_wave(v_spec, hop_length=args.hop_length)
     print('done')
-    sf.write('{}{}_Vocals.wav'.format(output_dir, basename), wave.T, sr)
+    sf.write('{}{}_Vocals.wav'.format(output_dir, args.id), wave.T, sr)
 
     if args.output_image:
         image = spec_utils.spectrogram_to_image(y_spec)
