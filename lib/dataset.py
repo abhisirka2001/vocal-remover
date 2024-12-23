@@ -7,9 +7,9 @@ import torch.utils.data
 from tqdm import tqdm
 
 try:
-    from lib import spec_utils
+    from . import spec_utils
 except ModuleNotFoundError:
-    import spec_utils
+    from . import spec_utils
 
 
 class VocalRemoverTrainingSet(torch.utils.data.Dataset):
